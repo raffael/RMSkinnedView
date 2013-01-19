@@ -20,13 +20,11 @@
 	NSColor *patternColor;
 }
 
-/** Sets the path file for the new pattern image, loads the pattern image immediately.
- @param backgroundPatternImage The image filename in the resources to be used as background pattern.
+/** The image filename in the resources to be used as background pattern.
  */
 @property (retain) NSImage *backgroundPatternImage;
 
-/** Sets the new pattern image.
- @param backgroundPatternImage The image to be used as background pattern.
+/** The image to be used as background pattern.
  */
 @property (retain,nonatomic) NSString *backgroundPatternImageName;
 
