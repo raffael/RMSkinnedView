@@ -22,7 +22,8 @@ Example:
 
 ## Scenario
 
-Often, one would have to subclass NSView to give it a custom background pattern image and keep a reference to the NSView instance to set the image. With this class, one can simply define the image path (as you would with +(NSImage *) imageNamed:;) in the Interface Builder object properties.
+Often, one would have to subclass NSView to give it a custom background pattern image and keep a reference to the NSView instance to set the image. With this class, one can simply define the image path (as you would with ```+(NSImage *) imageNamed:;)``` in the Interface Builder object properties.
+
 In our projects, we often use RMSkinnedView as the Title Bar view of *INAppStoreWindow* windows. The top left and the top right radius allows as to perfectly match the window's corner radius.
 
 ## Usage
@@ -32,3 +33,5 @@ Usage should be clear once you see the annotated header file.
 ## License
 
 Under BSD License.
+
+Follow @raffael_me for future updates and other goodies.
