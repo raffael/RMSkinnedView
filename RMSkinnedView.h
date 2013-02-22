@@ -8,9 +8,9 @@
 // Under BSD License
 
 /**
- * This subclass of NSView uses a NSImage as pattern to fill its background.
+ * This subclass of NSView uses a NSImage as pattern or a NSColor to fill its background.
  *
- * In Interface Builder you can specify the property 'backgroundPatternImageName'
+ * In Interface Builder you can specify the property 'backgroundPatternImageName' and others
  * to specify the image name of the view's background image without subclassing or
  * referencing-and-setting it.
  */
@@ -26,22 +26,22 @@
 
 /** The image to be used as background pattern.
  */
-@property (retain,nonatomic) NSString *backgroundPatternImageName;
+@property (retain,nonatomic) IBOutlet NSString *backgroundPatternImageName;
 
 /** The color, which will be used if image not loaded */
 @property (retain,nonatomic) NSColor *color;
 
 /** The string for the color, which will be used if image not loaded */
-@property (retain,nonatomic) NSString *colorString;
+@property (retain,nonatomic) IBOutlet NSString *colorString;
 
 /** The string for the pattern offset. */
-@property (retain,nonatomic) NSString *offsetString;
+@property (retain,nonatomic) IBOutlet NSString *offsetString;
 @property (assign,nonatomic) NSPoint patternOffset;
 
-@property (retain) NSNumber *cornerRadius;
-@property (assign) BOOL roundedTopLeft;
-@property (assign) BOOL roundedTopRight;
-@property (assign) BOOL roundedBottomLeft;
-@property (assign) BOOL roundedBottomRight;
+@property (retain) IBOutlet NSNumber *cornerRadius;
+@property (assign) IBOutlet BOOL roundedTopLeft;
+@property (assign) IBOutlet BOOL roundedTopRight;
+@property (assign) IBOutlet BOOL roundedBottomLeft;
+@property (assign) IBOutlet BOOL roundedBottomRight;
 
 @end
