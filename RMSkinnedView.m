@@ -25,7 +25,6 @@
     return self;
 }
 
-// if used in RMApplock, the background color should always be used/printed
 - (BOOL) shouldDrawColor {
 	return YES;
 }
@@ -39,7 +38,6 @@
 - (void) setBackgroundPatternImageName:(NSString *)backgroundPatternImageName {
 	_backgroundPatternImageName = backgroundPatternImageName;
 	self.backgroundPatternImage = [NSImage imageNamed:self.backgroundPatternImageName];
-	NSLog(@"image loaded is %@", self.backgroundPatternImage );
 }
 
 - (void) setColorString:(NSString *)colorString {
@@ -50,8 +48,6 @@
 	float a = [(NSString *)comps[3] floatValue];
 
 	self.color = [NSColor colorWithDeviceRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a];
-	NSLog(@"new color = %@", self.color);
-
 }
 
 - (void) setBackgroundPatternImage:(NSImage *)backgroundPatternImage {
@@ -79,7 +75,6 @@
 
 	if (patternColor) [patternColor set];
 	else [self.color set];
-	//NSRectFillUsingOperation(rect, NSCompositeSourceOver);
 
 	float roundedRectangleCornerRadius = self.cornerRadius.floatValue;
 	NSRect roundedRectangleRect = self.bounds;
