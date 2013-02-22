@@ -13,6 +13,8 @@
  * In Interface Builder you can specify the property 'backgroundPatternImageName' and others
  * to specify the image name of the view's background image without subclassing or
  * referencing-and-setting it.
+ *
+ * To highlight which properties can be set in the Interface Builder, we've added the IBOutlet keyword to those properties (ignore warnings).
  */
 #import <Cocoa/Cocoa.h>
 
@@ -28,17 +30,22 @@
  */
 @property (retain,nonatomic) IBOutlet NSString *backgroundPatternImageName;
 
-/** The color, which will be used if image not loaded */
-@property (retain,nonatomic) NSColor *color;
-
 /** The string for the color, which will be used if image not loaded */
 @property (retain,nonatomic) IBOutlet NSString *colorString;
 
+/** The color, which will be used if image not loaded */
+@property (retain,nonatomic) NSColor *color;
+
 /** The string for the pattern offset. */
 @property (retain,nonatomic) IBOutlet NSString *offsetString;
+
+/** The resulting pattern offset NSPoint. */
 @property (assign,nonatomic) NSPoint patternOffset;
 
+/** The corner radius, will be used for every corner. Default: 0. */
 @property (retain) IBOutlet NSNumber *cornerRadius;
+
+/** The flags for each of the four corners. Default: NO. */
 @property (assign) IBOutlet BOOL roundedTopLeft;
 @property (assign) IBOutlet BOOL roundedTopRight;
 @property (assign) IBOutlet BOOL roundedBottomLeft;
