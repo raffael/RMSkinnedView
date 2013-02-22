@@ -1,8 +1,16 @@
 # RMSkinnedView
 
-This subclass of NSView uses a NSImage as pattern to fill its background.
+This subclass of NSView uses a NSImage as pattern or a NSColor to fill its background. The view will be willed using **NSCompositeSourceOver**, so that layers beneath it stay visible when using transparency effects.
 
-In Interface Builder you can specify the property 'backgroundPatternImageName' to specify the image name of the view's background image without subclassing or referencing-and-setting it.
+The core feature of RMSkinnedWindow is the ability to define certain properties directly in the Interface builder. To do this, drag a new ´´´NSView´´´ to your UI and choose ´´´RMSkinnedView´´´ as its class. In the same view of Interface Builder (Identity Inspector), add properties according to the following rules to the **User Defined Runtime Attributes**.
+
+* **backgroundPatternImageName (STRING)** The name of the image in your ressources you want to use as a background pattern for the view. The image can contain transparency effects. The image will be loaded using ´´´[NSImage imageNamed:];´´´. A specified color will be ignored if the pattern image exists.
+
+* **colorString (STRING)** An RGBa string that defines the color you want to use, if you do not want to make use of pattern images. The format of the RGBa string is ´´´[0-255][0-255][0-255][0.0-1.0]´´´, e.g. ´´´255,128,0,0.5´´´. The color will be ignored if a pattern image has been set.
+
+* **cornerRadius (NUMBER)** A number defining the radius for all four corners of the View. You have to enable each corner manually using the following settings.
+
+* **roundedTopLeft (BOOL)**, **roundedTopRight (BOOL)**, **roundedBottomLeft (BOOL)**, **roundedBottomRight (BOOL)** Flags to enable corner-wise the rounded corners.
 
 ## Scenario
 
