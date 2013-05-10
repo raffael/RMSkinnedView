@@ -13,16 +13,17 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-	//	self.color = [NSColor colorWithCalibratedWhite:0.4 alpha:1.0];
 		self.patternOffset = NSMakePoint(0, 0);
 		self.cornerRadius = @0;
 		self.roundedBottomLeft = NO;
 		self.roundedBottomRight = NO;
 		self.roundedTopLeft = NO;
 		self.roundedTopRight = NO;
+		self.fixPatternOrigin = NO;
+		self.mouseDownCanMoveWindow = NO;
+		self.dontDrawAsPattern = YES;
     }
-    
-    return self;
+	return self;
 }
 
 - (BOOL) shouldDrawColor {
@@ -67,41 +68,57 @@
     NSRectFillUsingOperation(rect, NSCompositeSourceOver);
 
 	NSPoint point = self.patternOffset;
-	point.y += self.window.frame.size.height;
+	if (self.fixPatternOrigin) {
+		point.y = self.window.frame.size.height+self.patternOffset.y;
+		point.x = self.window.frame.size.width+self.patternOffset.x-self.frame.origin.x;
+	}
 	[[NSGraphicsContext currentContext] setPatternPhase:point];
-
 	if (!self.backgroundPatternImage && !self.color)
 		return;
 
-	if (patternColor) [patternColor set];
-	else [self.color set];
+	if (!self.dontDrawAsPattern) {
+		if (patternColor) [patternColor set];
+		else [self.color set];
 
-	float roundedRectangleCornerRadius = self.cornerRadius.floatValue;
-	NSRect roundedRectangleRect = self.bounds;
-	NSRect roundedRectangleInnerRect = NSInsetRect(roundedRectangleRect, roundedRectangleCornerRadius, roundedRectangleCornerRadius);
-	NSBezierPath* roundedRectanglePath = [NSBezierPath bezierPath];
+		float roundedRectangleCornerRadius = self.cornerRadius.floatValue;
+		NSRect roundedRectangleRect = self.bounds;
+		NSRect roundedRectangleInnerRect = NSInsetRect(roundedRectangleRect, roundedRectangleCornerRadius, roundedRectangleCornerRadius);
+		NSBezierPath* roundedRectanglePath = [NSBezierPath bezierPath];
 
-	if (self.roundedBottomLeft)
-		[roundedRectanglePath appendBezierPathWithArcWithCenter: NSMakePoint(NSMinX(roundedRectangleInnerRect), NSMinY(roundedRectangleInnerRect)) radius: roundedRectangleCornerRadius startAngle: 180 endAngle: 270];
-	else
-		[roundedRectanglePath moveToPoint: NSMakePoint(NSMinX(roundedRectangleRect), NSMinY(roundedRectangleRect))];
+		if (self.roundedBottomLeft)
+			[roundedRectanglePath appendBezierPathWithArcWithCenter: NSMakePoint(NSMinX(roundedRectangleInnerRect), NSMinY(roundedRectangleInnerRect)) radius: roundedRectangleCornerRadius startAngle: 180 endAngle: 270];
+		else
+			[roundedRectanglePath moveToPoint: NSMakePoint(NSMinX(roundedRectangleRect), NSMinY(roundedRectangleRect))];
 
-	if (self.roundedBottomRight)
-		[roundedRectanglePath appendBezierPathWithArcWithCenter: NSMakePoint(NSMaxX(roundedRectangleInnerRect), NSMinY(roundedRectangleInnerRect)) radius: roundedRectangleCornerRadius startAngle: 270 endAngle: 360];
-	else
-		[roundedRectanglePath lineToPoint: NSMakePoint(NSMaxX(roundedRectangleRect), NSMinY(roundedRectangleRect))];
+		if (self.roundedBottomRight)
+			[roundedRectanglePath appendBezierPathWithArcWithCenter: NSMakePoint(NSMaxX(roundedRectangleInnerRect), NSMinY(roundedRectangleInnerRect)) radius: roundedRectangleCornerRadius startAngle: 270 endAngle: 360];
+		else
+			[roundedRectanglePath lineToPoint: NSMakePoint(NSMaxX(roundedRectangleRect), NSMinY(roundedRectangleRect))];
 
-	if (self.roundedTopRight)
-		[roundedRectanglePath appendBezierPathWithArcWithCenter: NSMakePoint(NSMaxX(roundedRectangleInnerRect), NSMaxY(roundedRectangleInnerRect)) radius: roundedRectangleCornerRadius startAngle: 0 endAngle: 90];
-	else
-		[roundedRectanglePath lineToPoint: NSMakePoint(NSMaxX(roundedRectangleRect), NSMaxY(roundedRectangleRect))];
+		if (self.roundedTopRight)
+			[roundedRectanglePath appendBezierPathWithArcWithCenter: NSMakePoint(NSMaxX(roundedRectangleInnerRect), NSMaxY(roundedRectangleInnerRect)) radius: roundedRectangleCornerRadius startAngle: 0 endAngle: 90];
+		else
+			[roundedRectanglePath lineToPoint: NSMakePoint(NSMaxX(roundedRectangleRect), NSMaxY(roundedRectangleRect))];
 
-	if (self.roundedTopLeft)
-		[roundedRectanglePath appendBezierPathWithArcWithCenter: NSMakePoint(NSMinX(roundedRectangleInnerRect), NSMaxY(roundedRectangleInnerRect)) radius: roundedRectangleCornerRadius startAngle: 90 endAngle: 180];
-	else
-		[roundedRectanglePath lineToPoint: NSMakePoint(NSMinX(roundedRectangleRect), NSMaxY(roundedRectangleRect))];
-	[roundedRectanglePath closePath];
-	[roundedRectanglePath fill];
+		if (self.roundedTopLeft)
+			[roundedRectanglePath appendBezierPathWithArcWithCenter: NSMakePoint(NSMinX(roundedRectangleInnerRect), NSMaxY(roundedRectangleInnerRect)) radius: roundedRectangleCornerRadius startAngle: 90 endAngle: 180];
+		else
+			[roundedRectanglePath lineToPoint: NSMakePoint(NSMinX(roundedRectangleRect), NSMaxY(roundedRectangleRect))];
+		[roundedRectanglePath closePath];
+		[roundedRectanglePath fill];
+
+	} else {
+		// draw as Image, not as pattern
+		float width = self.backgroundPatternImage.size.width;
+		float height = self.backgroundPatternImage.size.height;
+		NSPoint point = NSMakePoint(ceilf(self.bounds.size.width/2.0-width/2.0), ceilf(self.bounds.size.height/2.0-height/2.0));
+		//[[NSGraphicsContext currentContext] setImageInterpolation: NSImageInterpolationNone];
+		[self.backgroundPatternImage drawAtPoint:point fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+	}
+}
+
+- (BOOL) mouseDownMovesWindow {
+	return self.mouseDownCanMoveWindow;
 }
 
 @end

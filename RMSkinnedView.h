@@ -51,4 +51,16 @@
 @property (assign) IBOutlet BOOL roundedBottomLeft;
 @property (assign) IBOutlet BOOL roundedBottomRight;
 
+/** Set to YES if background image moves while resizing the window. Default: NO.
+ */
+@property (assign) IBOutlet BOOL fixPatternOrigin;
+
+/** Set to YES if you want to user to move the parent window while dragging the view. Default: NO.
+ */
+@property (assign) IBOutlet BOOL mouseDownCanMoveWindow;
+
+/** Set to NO if the image shall be painted as pattern, instead of only once, centered in the view. Default: NO.
+ */
+@property (assign) IBOutlet BOOL dontDrawAsPattern;
+
 @end
