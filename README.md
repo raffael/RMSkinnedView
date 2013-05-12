@@ -2,7 +2,7 @@
 
 This subclass of NSView uses a NSImage as pattern or a NSColor to fill its background. The view will be filled using **NSCompositeSourceOver**, so that layers beneath it stay visible when using transparency effects.
 
-![RMSkinnedView Preview](https://github.com/raffael-me/RMSkinnedView/blob/master/preview.png?raw=true "Custom NSView subclass with background image")
+![RMSkinnedView Preview](https://github.com/raffael/RMSkinnedView/blob/master/preview.png?raw=true "Custom NSView subclass with background image")
 
 The core feature of **RMSkinnedWindow** is the ability to define certain properties directly in the Interface builder, which reduces the amount of code required to build beautiful applications. To do this, drag a new ```NSView``` to your UI and choose ```RMSkinnedView``` as its class. In the same view of Interface Builder (Identity Inspector), add properties according to the following rules to the **User Defined Runtime Attributes**.
 
