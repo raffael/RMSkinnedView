@@ -30,8 +30,17 @@ In our projects, we often use RMSkinnedView as the Title Bar view of *INAppStore
 
 Usage should be clear once you see the annotated header file.
 
+## Contact
+
+* Raffael Hannemann
+* [@raffael-me](http://www.twitter.com/raffae-me/)
+* http://www.raffael.me/
+
 ## License
 
+Copyright (c) 2013 Raffael Hannemann
 Under BSD License.
 
-Follow @raffael_me for future updates and other goodies.
+## Want more?
+
+Follow [@raffael-me](http://www.twitter.com/raffae-me/) for similar releases.
