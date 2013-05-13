@@ -18,7 +18,7 @@ The core feature of **RMSkinnedWindow** is the ability to define certain propert
 
 Example:
 
-![RMSkinnedView Settings](https://github.com/raffael-me/RMSkinnedView/blob/master/settings.png?raw=true "Custom NSView subclass with background image and its settings in Interface Builder")
+![RMSkinnedView Settings](https://github.com/raffael/RMSkinnedView/blob/master/settings.png?raw=true "Custom NSView subclass with background image and its settings in Interface Builder")
 
 ## Scenario
 
@@ -33,7 +33,7 @@ Usage should be clear once you see the annotated header file.
 ## Contact
 
 * Raffael Hannemann
-* [@raffael-me](http://www.twitter.com/raffael-me/)
+* [@raffael_me](http://www.twitter.com/raffael_me/)
 * http://www.raffael.me/
 
 ## License
@@ -43,4 +43,4 @@ Under BSD License.
 
 ## Want more?
 
-Follow [@raffael-me](http://www.twitter.com/raffael-me/) for similar releases.
+Follow [@raffael_me](http://www.twitter.com/raffael_me/) for similar releases.
