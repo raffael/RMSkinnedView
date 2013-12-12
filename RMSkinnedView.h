@@ -24,26 +24,29 @@
 
 /** The image filename in the resources to be used as background pattern.
  */
-@property (retain,nonatomic) NSImage *backgroundPatternImage;
+@property (strong,nonatomic) NSImage *backgroundPatternImage;
 
 /** The image to be used as background pattern.
  */
-@property (retain,nonatomic) IBOutlet NSString *backgroundPatternImageName;
+@property (strong,nonatomic) IBOutlet NSString *backgroundPatternImageName;
 
 /** The string for the color, which will be used if image not loaded */
-@property (retain,nonatomic) IBOutlet NSString *colorString;
+@property (strong,nonatomic) IBOutlet NSString *colorString;
 
 /** The color, which will be used if image not loaded */
-@property (retain,nonatomic) NSColor *color;
+@property (strong,nonatomic) NSColor *color;
 
 /** The string for the pattern offset. */
-@property (retain,nonatomic) IBOutlet NSString *offsetString;
+@property (strong,nonatomic) IBOutlet NSString *offsetString;
 
 /** The resulting pattern offset NSPoint. */
 @property (assign,nonatomic) NSPoint patternOffset;
 
 /** The corner radius, will be used for every corner. Default: 0. */
-@property (retain) IBOutlet NSNumber *cornerRadius;
+@property (strong) IBOutlet NSNumber *cornerRadius;
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-iboutlet"
 
 /** The flags for each of the four corners. Default: NO. */
 @property (assign) IBOutlet BOOL roundedTopLeft;
@@ -62,5 +65,7 @@
 /** Set to NO if the image shall be painted as pattern, instead of only once, centered in the view. Default: NO.
  */
 @property (assign) IBOutlet BOOL dontDrawAsPattern;
+
+#pragma clang diagnostic pop
 
 @end
